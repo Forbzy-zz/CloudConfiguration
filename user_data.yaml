@@ -22,8 +22,7 @@ coreos:
       command: start
     - name: fleet.service
       command: start
-    - name: static.network
-      - name: systemd-networkd.service
+    - name: systemd-networkd.service
       command: stop
     - name: 00-eth0.network
       runtime: true
