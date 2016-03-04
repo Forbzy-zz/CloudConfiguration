@@ -5,9 +5,9 @@ hostname: core
 coreos:  
   coreos:
   etcd2:
-    name:"node1"
+    name: "node1"
     # generate a new token for each unique cluster from https://discovery.etcd.io/new?size=3
-   
+    discovery: "https://discovery.etcd.io/a4b389e0b6337098be07be877d5d6a96"
     # multi-region and multi-cloud deployments need to use $public_ipv4
     advertise-client-urls: "http://$public_ipv4:2379"
     initial-advertise-peer-urls: "http://$private_ipv4:2380"
@@ -18,7 +18,7 @@ coreos:
 	
   fleet:
     public-ip: "$public_ipv4"
-    metadata: "region=us-west"
+    metadata: "region=uk"
 	
   units:
     - name: etcd2.service
@@ -38,7 +38,7 @@ coreos:
 users:  
   - name: core
     ssh-authorized-keys: 
-      - ssh-rsa ssh-rsa AAAAB3NzaC1yc2EAAAABJQAAAQEA2rJzv1817tzTaGPCyo3EoIjuKO3Vnv+M43Krd0JEL9lKbdkkBXPleMkZWU7lwlpfNWsAQI1FaZR2z2B9X5HNJN7aylN4kq+mPoegYkO86Q1feoQg67drzzvO5MFcatRGzl1SpGEKN5nOYH+ZuZo8XQesKbEYE6pjdz12cDSA6SlHlDvSSw8DOY6Su/9IaMHezNKWyrlpKmoSMtiDpbBtrTBfiI7tuSrmWk5vZ/zo/6TVlXotxNESDcDXbQjcMnXL4bY3keu/6NmHhF/mpfsDXs8/GnOpoe725tnJXDZDqvC/Z/aj46c1X2BKdlhw82drzKbOeb77/0HmRF7NMhcDHQ== rsa-key-20160304
+      - ssh-rsa AAAAB3NzaC1yc2EAAAABJQAAAQEA2rJzv1817tzTaGPCyo3EoIjuKO3Vnv+M43Krd0JEL9lKbdkkBXPleMkZWU7lwlpfNWsAQI1FaZR2z2B9X5HNJN7aylN4kq+mPoegYkO86Q1feoQg67drzzvO5MFcatRGzl1SpGEKN5nOYH+ZuZo8XQesKbEYE6pjdz12cDSA6SlHlDvSSw8DOY6Su/9IaMHezNKWyrlpKmoSMtiDpbBtrTBfiI7tuSrmWk5vZ/zo/6TVlXotxNESDcDXbQjcMnXL4bY3keu/6NmHhF/mpfsDXs8/GnOpoe725tnJXDZDqvC/Z/aj46c1X2BKdlhw82drzKbOeb77/0HmRF7NMhcDHQ== rsa-key-20160304
 
   - groups:
       - sudo
