@@ -23,9 +23,9 @@ coreos:
     - name: fleet.service
       command: start
     - name: static.network
-      content:
+      content: |
         [Match]
-        Name=enp2s0
+        Name=en2s0
 
         [Network]
         Address=192.168.100.109/24
