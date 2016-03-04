@@ -23,15 +23,29 @@ coreos:
     - name: fleet.service
       command: start
     - name: static.network
+      - name: systemd-networkd.service
+      command: stop
+    - name: 00-eth0.network
+      runtime: true
       content: |
         [Match]
-        Name=enp0s3
+        Name=eth0
 
         [Network]
         Address=192.168.100.109/24
         Gateway=192.168.100.1
         DNS=8.8.4.4
         DNS=8.8.8.8
+    - name: down-interfaces.service
+      command: start
+      content: |
+        [Service]
+        Type=oneshot
+        ExecStart=/usr/bin/ip link set eth0 down
+        ExecStart=/usr/bin/ip addr flush dev eth0
+    - name: systemd-networkd.service
+      command: restart
+
 users:  
   - name: core
     ssh-authorized-keys: 
