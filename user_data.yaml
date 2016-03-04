@@ -44,7 +44,8 @@ coreos:
         ExecStart=/usr/bin/ip addr flush dev eth0
     - name: systemd-networkd.service
       command: restart
- write_files:
+	  
+write_files:
   - path: "/etc/network/interfaces"
     permissions: "0644"
     owner: "root"
@@ -56,6 +57,7 @@ coreos:
       broadcast 192.168.1.255
       gateway 192.168.100.1
       dns-nameservers 8.8.8.8, 8.8.4.4
+	  
 users:  
   - name: core
     ssh-authorized-keys: 
