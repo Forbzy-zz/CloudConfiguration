@@ -2,6 +2,20 @@
 
 hostname: core
 
+write_files:
+  - path: "/etc/network/interfaces"
+    permissions: "0644"
+    owner: "root"
+    content: |
+      nameserver 8.8.8.8
+      iface eth0 inet static
+      address=192.168.100.109/24
+      netmask 255.255.255.0
+      network 192.168.1.0
+      broadcast 192.168.1.255
+      gateway 192.168.100.1
+      dns-nameservers 8.8.8.8, 8.8.4.4
+
 coreos:  
   etcd2:
     name: "node1"
@@ -22,42 +36,6 @@ coreos:
       command: start
     - name: fleet.service
       command: start
-    - name: systemd-networkd.service
-      command: stop
-    - name: 00-eth0.network
-      runtime: true
-      content: |
-        [Match]
-        Name=eth0
-
-        [Network]
-        Address=192.168.100.109/24
-        Gateway=192.168.100.1
-        DNS=8.8.4.4
-        DNS=8.8.8.8
-    - name: down-interfaces.service
-      command: start
-      content: |
-        [Service]
-        Type=oneshot
-        ExecStart=/usr/bin/ip link set eth0 down
-        ExecStart=/usr/bin/ip addr flush dev eth0
-    - name: systemd-networkd.service
-      command: restart
-	  
-write_files:
-  - path: "/etc/network/interfaces"
-    permissions: "0644"
-    owner: "root"
-    content: |
-      iface eth0 inet static
-      address=192.168.100.109/24
-      netmask 255.255.255.0
-      network 192.168.1.0
-      broadcast 192.168.1.255
-      gateway 192.168.100.1
-      dns-nameservers 8.8.8.8, 8.8.4.4
-	  
 users:  
   - name: core
     ssh-authorized-keys: 
