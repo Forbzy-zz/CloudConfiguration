@@ -36,6 +36,16 @@ coreos:
       command: start
     - name: fleet.service
       command: start
+    - name: static.network
+      runtime: yes
+      content: |
+        [Match]
+        Name=enp0s3
+
+        [Network]
+        Gateway=192.168.100.1
+        Address=192.168.100.109/24
+        DNS=8.8.8.8
 users:  
   - name: core
     ssh-authorized-keys: 
