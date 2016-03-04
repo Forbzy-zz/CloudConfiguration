@@ -44,18 +44,18 @@ coreos:
         ExecStart=/usr/bin/ip addr flush dev eth0
     - name: systemd-networkd.service
       command: restart
-  write_files:
-    - path: "/etc/network/interfaces"
-      permissions: "0644"
-      owner: "root"
-      content: |
-        iface eth0 inet static
-        address=192.168.100.109/24
-        netmask 255.255.255.0
-        network 192.168.1.0
-        broadcast 192.168.1.255
-        gateway 192.168.100.1
-        dns-nameservers 8.8.8.8, 8.8.4.4
+ write_files:
+  - path: "/etc/network/interfaces"
+    permissions: "0644"
+    owner: "root"
+    content: |
+      iface eth0 inet static
+      address=192.168.100.109/24
+      netmask 255.255.255.0
+      network 192.168.1.0
+      broadcast 192.168.1.255
+      gateway 192.168.100.1
+      dns-nameservers 8.8.8.8, 8.8.4.4
 users:  
   - name: core
     ssh-authorized-keys: 
