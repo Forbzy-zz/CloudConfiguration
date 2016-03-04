@@ -50,7 +50,6 @@ coreos:
       owner: "root"
       content: |
       iface eth0 inet static
-	  
       address=192.168.100.109/24
       netmask 255.255.255.0
       network 192.168.1.0
